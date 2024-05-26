@@ -1,0 +1,27 @@
+services:
+  db:
+    image: mariadb:latest
+    container_name: listingdb
+    environment:
+      MYSQL_ROOT_PASSWORD: listingpass
+      MYSQL_DATABASE: individuallistingdb
+      MYSQL_USER: quinnlistings
+      MYSQL_PASSWORD: listingpass
+    ports:
+      - "3307:3307"
+    
+  users:
+    build: .
+    container_name: listingbackend
+    command: python manage.py runserver 0.0.0.0:8020
+    volumes:
+      - .:/app
+    ports:
+      - "8020:8020"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_HOST=listingdb
+      - DATABASE_NAME=individuallistingdb
+      - DATABASE_USER=quinnlistings
+      - DATABASE_PASSWORD=listingpass
