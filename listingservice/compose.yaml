@@ -1,5 +1,5 @@
 services:
-  db:
+  listingdb:
     image: mariadb:latest
     container_name: listingdb
     environment:
@@ -8,20 +8,39 @@ services:
       MYSQL_USER: quinnlistings
       MYSQL_PASSWORD: listingpass
     ports:
-      - "3307:3307"
+      - "3316:3306"
+    networks:
+      - linkedtinder
+  
+  rabbit:
+    image: "rabbitmq:3-management"
+    container_name: rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - linkedtinder
     
-  users:
+  listingbackend:
     build: .
     container_name: listingbackend
-    command: python manage.py runserver 0.0.0.0:8020
+    image: individualsem6.azurecr.io/listingbackend:latest
+    command: bash -c "python check_db.py --service-name listingdb --ip listingdb --port 3316 && /app/entrypoint.sh"
     volumes:
       - .:/app
     ports:
       - "8020:8020"
     depends_on:
-      - db
+      - listingdb
+      - rabbit
     environment:
       - DATABASE_HOST=listingdb
       - DATABASE_NAME=individuallistingdb
       - DATABASE_USER=quinnlistings
       - DATABASE_PASSWORD=listingpass
+    networks:
+      - linkedtinder
+
+networks: 
+  linkedtinder:
+    external: true

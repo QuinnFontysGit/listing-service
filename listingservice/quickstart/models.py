@@ -2,13 +2,12 @@ from django.db import models
 
 # company id, description, title, salary, hours
 class Listing(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.CharField(max_length=500)
     salary = models.IntegerField()
     hours = models.IntegerField()
     companyid = models.IntegerField()
 
-    def __str__(self):
-        return self.name
-
-
+    class Meta:
+        ordering=["created"]

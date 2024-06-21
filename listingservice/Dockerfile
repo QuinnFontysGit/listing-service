@@ -16,7 +16,8 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
+RUN chmod +x entrypoint.sh
 
 EXPOSE 8020
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8020"]
+CMD ["/app/entrypoint.sh"]

@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  SECRET_KEY: django-insecure-pe$($frqte2n6#hw+8%2=@u28h+ino)%54f*i!y#c771xi5p_g
+  DB_NAME: individuallistingdb
+  DB_USER: quinnlistings
+  DB_PASS: listingpass
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: listingbackend
+  name: listingbackend-cm0
