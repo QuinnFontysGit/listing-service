@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-pe$($frqte2n6#hw+8%2=@u28h+ino)%54f*i!y#c771xi5p_g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['listingbackend', 'listingbackend.default.svc.cluster.local', 'localhost']
+#ALLOWED_HOSTS = ['listingbackend', 'listingbackend.default.svc.cluster.local', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -91,7 +92,7 @@ DATABASES = {
         'USER': 'quinnlistings',
         'PASSWORD': 'listingpass',
         'HOST': 'listingdb',
-        'PORT': '3316'
+        'PORT': '3306'
     }
 }
 

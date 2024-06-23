@@ -25,7 +25,7 @@ services:
     build: .
     container_name: listingbackend
     image: individualsem6.azurecr.io/listingbackend:latest
-    command: bash -c "python check_db.py --service-name listingdb --ip listingdb --port 3316 && /app/entrypoint.sh"
+    command: bash -c "python check_db.py --service-name listingdb --ip listingdb --port 3306 && /app/entrypoint.sh"
     volumes:
       - .:/app
     ports:
